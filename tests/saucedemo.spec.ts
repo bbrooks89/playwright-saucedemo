@@ -4,6 +4,7 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 
 test.describe('Login', () => {
+  test.use({ storageState: { cookies: [], origins: [] } });   // start with no session
   let loginPage: LoginPage;
 
   test.beforeEach(async ({ page }) => {
@@ -33,9 +34,10 @@ test.describe('Cart and checkout', () => {
   let inventory: InventoryPage;
 
   test.beforeEach(async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.login('standard_user', 'secret_sauce');
+    // const loginPage = new LoginPage(page);
+    // await loginPage.goto();
+    // await loginPage.login('standard_user', 'secret_sauce');
+    await page.goto('/inventory.html');   // already logged in from the saved session
     inventory = new InventoryPage(page);
   });
 
