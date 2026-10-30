@@ -40,18 +40,26 @@ export default defineConfig({
 
     {
       name: 'chromium',
+      testIgnore: /api\/.*/,
       use: { ...devices['Desktop Chrome'], storageState: 'playwright/.auth/user.json' },
       dependencies: ['setup'],
     },
     {
       name: 'firefox',
+      testIgnore: /api\/.*/,
       use: { ...devices['Desktop Firefox'], storageState: 'playwright/.auth/user.json' },
       dependencies: ['setup'],
     },
     {
       name: 'webkit',
+      testIgnore: /api\/.*/,
       use: { ...devices['Desktop Safari'], storageState: 'playwright/.auth/user.json' },
       dependencies: ['setup'],
+    },
+    {
+      name: 'api',
+      testMatch: /api\/.*\.spec\.ts/,
+      use: { baseURL: 'https://jsonplaceholder.typicode.com' },
     },
   ],
   /* Run your local dev server before starting the tests */
